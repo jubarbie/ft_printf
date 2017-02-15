@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS= -Ilibft -Wall -Wextra -Werror
-SRC=	main.c				\
-		ft_printf.c			
+CFLAGS= -Ilibft -IIncludes -Wall -Wextra -Werror
+SRC=	Sources/main.c				\
+		Sources/ft_printf.c			
 
 OBJS = $(SRC:.c=.o)
 NAME = ft_printf_test
