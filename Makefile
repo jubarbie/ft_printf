@@ -6,12 +6,12 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2017/01/09 14:29:23 by mmoullec         ###   ########.fr        #
+#    Updated: 2018/05/11 16:16:14 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS= -Ilibft -IIncludes -Wall -Wextra -Werror
+CFLAGS= -Ilibft -IIncludes
 SRC=	Sources/main.c				\
 		Sources/ft_printf.c			
 
