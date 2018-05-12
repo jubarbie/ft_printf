@@ -6,14 +6,17 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2018/05/11 16:16:14 by jubarbie         ###   ########.fr        #
+#    Updated: 2018/05/12 14:56:35 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS= -Ilibft -IIncludes
 SRC=	Sources/main.c				\
-		Sources/ft_printf.c			
+		Sources/ft_printf.c			\
+		Sources/int_conversions.c	\
+		Sources/str_conversions.c	\
+		Sources/flags_parsing.c			
 
 OBJS = $(SRC:.c=.o)
 NAME = ft_printf_test
