@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2018/05/12 14:56:35 by jubarbie         ###   ########.fr        #
+#    Updated: 2018/05/14 16:35:09 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC=	Sources/main.c				\
 OBJS = $(SRC:.c=.o)
 NAME = ft_printf_test
 
+.PHONY: $(NAME) fclean clean re all
+
 $(NAME): $(OBJS)
 	@make -C libft
 	@$(CC) -Llibft/ -lft -o $@ $^
@@ -30,10 +32,8 @@ all: $(NAME)
 
 clean:
 	@make clean -C libft
-	@rm -rf $(OBJ)
+	@rm -f $(OBJS)
 	@echo "\033[32m[OK]\033[0m object files deleted"
-
-.PHONY: fclean
 
 fclean: clean
 	@make fclean -C libft
