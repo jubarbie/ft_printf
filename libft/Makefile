@@ -6,7 +6,7 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2018/05/14 10:10:14 by jubarbie         ###   ########.fr        #
+#    Updated: 2018/05/15 10:38:53 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC=	ft_atoi.c \
 		ft_isprint.c \
 		ft_itoa.c \
 		ft_itoa_opt.c \
+		ft_uitoa_opt.c \
 		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memchr.c \
@@ -65,6 +66,7 @@ SRC=	ft_atoi.c \
 		ft_strstr.c \
 		ft_strsub.c \
 		ft_strtrim.c \
+		ft_strrepeat.c \
 		ft_tolower.c \
 		ft_toupper.c \
 		ft_lstnew.c \

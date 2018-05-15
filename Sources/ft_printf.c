@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 18:23:41 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/12 14:52:08 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:05:21 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,62 +41,47 @@ char	*get_segment(char *str, char **ret, va_list ap)
 	return (str + i);
 }
 
-void	print_array(char **arr)
+int		parse_format(char ***arr, const char *restrict format, va_list ap)
 {
-	int	i;
-
-	i = -1;
-	while (arr[++i] != NULL)
-		ft_putendl(arr[i]);
-}
-
-int	parse_format(char ***arr, const char *restrict format, va_list ap)
-{
-	int		nb_args;	
+	int		nb_args;
 	char	*str;
 	int		i;
 
 	nb_args = get_nb_args(format);
 	*arr = (char **)malloc(sizeof(char *) * (nb_args + 1) * 2);
-	i = 0;
-	while (i < (nb_args + 1) * 2)
-		(*arr)[i++] = NULL;
-	str = (char *)format;
-	i = 0;
-	while (*str)
+	if (*arr != NULL)
 	{
-		str = get_segment(str, &((*arr)[i]), ap);
-		i++;
+		i = 0;
+		while (i < (nb_args + 1) * 2)
+			(*arr)[i++] = NULL;
+		str = (char *)format;
+		i = 0;
+		while (*str)
+		{
+			str = get_segment(str, &((*arr)[i]), ap);
+			i++;
+		}
+		return (nb_args);
 	}
-	//print_array(*arr);
-	return (nb_args);
+	return (-1);
 }
 
-int	ft_printf(const char *restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
 	int		nb;
 	va_list	ap;
 	char	*str;
 	char	**arr;
-	int		len;
-	int		i;
 
 	va_start(ap, format);
 	nb = parse_format(&arr, format, ap);
-	len = 0;
-	i = 0;
-	str = *arr;
-	while (i < (nb + 1) * 2)
-	{
-		if (str != NULL)
-		{
-			ft_putstr(str);
-			len += ft_strlen(str);
-			free(str);
-		}
-		str = arr[++i];
-	}
+	if (arr == NULL)
+		return (-1);
+	str = join_array(arr, (nb + 1) * 2);
+	if (str == NULL)
+		return (-1);
+	ft_putstr(str);
 	free(arr);
 	va_end(ap);
-	return (len);
+	return (ft_strlen(str));
 }

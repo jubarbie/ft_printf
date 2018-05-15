@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:08:55 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/14 15:24:31 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:07:15 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		get_flags(char *str, char *f)
 	return (i);
 }
 
-int	get_width(char *str, int *p)
+int		get_width(char *str, int *p)
 {
 	int	i;
 
@@ -44,11 +44,11 @@ int	get_width(char *str, int *p)
 	return (i);
 }
 
-int	get_prec(char *str, int *w)
+int		get_prec(char *str, int *w)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	*w = 0;
 	if (str[i] != '.')
 		return (0);
@@ -59,35 +59,25 @@ int	get_prec(char *str, int *w)
 	return (i);
 }
 
-int get_modif(char *str, char *m)
+int		get_modif(char *str, char *m)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	*m = 0;
 	if (ft_strchr(MOD, str[i]) != NULL)
 	{
-		if (str[i] == 'h' && str[i + 1] == 'h')
+		j = 0;
+		while (MOD[j])
 		{
-			*m |= M_HH;
-			i++;
+			if (str[i] == MOD[j])
+				*m |= (1 << (j + ((str[i] == str[i + 1]) ? 4 : 0)));
+			j++;
 		}
-		else if (str[i] == 'l' && str[i + 1] == 'l')
-		{	
-			i++;
-			*m |= M_LL;
-		}
-		else if (*str == 'h')
-			*m = M_H;
-		else if (*str == 'l')
-			*m = M_L;
-		else if (*str == 'j')
-			*m = M_J;
-		else if (*str == 'z')
-			*m = M_Z;
-		i++;
+		i += (*m >= M_HH) ? 2 : 1;
 	}
-	return (i);	
+	return (i);
 }
 
 char	*get_options(char *str, char **ret, va_list ap)
@@ -109,32 +99,9 @@ char	*get_options(char *str, char **ret, va_list ap)
 	i += get_prec(&str[i], &(opt.prec));
 	i += get_modif(&str[i], &(opt.modif));
 	opt.conv = str[i];
-	if (ft_strchr(CONV_INT, str[i]) != NULL)
-	{
-		if (opt.conv == 'u' || opt.conv == 'U')
-		{
-			if (opt.modif & M_LL)
-				*ret = int_conversions(va_arg(ap, unsigned long long int), &opt);
-			else if (opt.modif & M_L || opt.modif & M_J)
-				*ret = int_conversions(va_arg(ap, unsigned long int), &opt);
-			else	
-				*ret = int_conversions(va_arg(ap, unsigned int), &opt);
-		}
-		if (opt.modif & M_LL)
-			*ret = int_conversions(va_arg(ap, long long int), &opt);
-		else if (opt.modif & M_L || opt.modif & M_J)
-			*ret = int_conversions(va_arg(ap, long int), &opt);
-		else	
-			*ret = int_conversions(va_arg(ap, int), &opt);
-	}
-	if (ft_strchr(CONV_CHAR, str[i]) != NULL)
-		*ret = char_conversion(va_arg(ap, int), &opt);
-	if (ft_strchr(CONV_STR, str[i]) != NULL)
-		*ret = str_conversion(va_arg(ap, char *), &opt);
+	convert(ret, ap, &opt);
 	i++;
 	if (i == 1)
 		*ret = ft_strdup("");
 	return (str + i);
 }
-
-
