@@ -6,12 +6,14 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 11:43:02 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 11:49:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/15 17:57:51 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#define NB_TESTS 9
+#include "locale.h"
+
+#define NB_TESTS 10
 #define TEST0 "Je m'appelle %s et j'ai %d ans!\n", "Jules Barbier", 32
 #define TEST1 "%d en hexa ça donne: %x\n", 32, 32
 #define TEST2 "La lettre %c en decimal c'est %d\n", 'c', 'c'
@@ -28,6 +30,16 @@
 -72147483647, (long long int)8987214748647909000, (short)-788, \
 (signed char)78, (intmax_t)23, (size_t)23
 #define TEST8 "%u\n", 21
+#define TEST9 \
+	"%s, %C, %d, %i, %o, %u, %x, %X\n", \
+	"I love you too", \
+	945, \
+	-1203, \
+	32001, \
+	322109, \
+	43222, \
+	120, \
+	24432
 
 void	test_head(char *name, int i)
 {
@@ -48,9 +60,6 @@ void	test_foot(int a, int b)
 
 void	test(char *name, int i)
 {
-	int	a;
-	int	b;
-
 	test_head(name, i);
 	if (i == 0)
 		test_foot(printf(TEST0), ft_printf(TEST0));
@@ -70,12 +79,21 @@ void	test(char *name, int i)
 		test_foot(printf(TEST7), ft_printf(TEST7));
 	if (i == 8)
 		test_foot(printf(TEST8), ft_printf(TEST8));
+	if (i == 9)
+		test_foot(printf(TEST9), ft_printf(TEST9));
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
-	int	i;
-
+	int		i;
+	char*	l;
+	
+	l = setlocale(LC_ALL, "");
+	if (l == NULL) {
+		printf("Locale not set\n");
+	} else {
+		printf("Locale set to %s\n", l);
+	}
 	i = 0;
 	while (i < NB_TESTS)
 		test("TEST", i++);

@@ -6,14 +6,13 @@
 #    By: jubarbie <jubarbie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/10/30 16:51:35 by jubarbie          #+#    #+#              #
-#    Updated: 2018/05/15 14:06:25 by jubarbie         ###   ########.fr        #
+#    Updated: 2018/05/15 19:11:16 by jubarbie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS= -Ilibft -IIncludes
-SRC=	Sources/main.c					\
-		Sources/ft_printf.c				\
+CFLAGS= -Ilibft -IIncludes -Wall -Wextra -Werror
+SRC=	Sources/ft_printf.c				\
 		Sources/unsigned_conversions.c	\
 		Sources/signed_conversions.c	\
 		Sources/format.c				\
@@ -23,14 +22,16 @@ SRC=	Sources/main.c					\
 		Sources/flags_parsing.c			
 
 OBJS = $(SRC:.c=.o)
-NAME = ft_printf_test
+NAME = libftprintf.a
 
-.PHONY: $(NAME) fclean clean re all
+.PHONY: $(NAME) fclean clean re all test
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@$(CC) -Llibft/ -lft -o $@ $^
-	@echo "\033[32m[OK]\033[0m ft_printf_test created"
+	@$(CC) -Llibft/ -lft -o $@ -c $^
+	@ar rc $@ $^
+	@ranlib $@
+	@echo "\033[32m[OK]\033[0m libftprintf.a created"
 
 all: $(NAME)
 

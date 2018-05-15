@@ -6,13 +6,18 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:10:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 11:42:10 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:38:46 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*change_base(char *s1, t_opt *o)
+static char	toupper(char c)
+{
+	return ((char)ft_toupper((int)c));
+}
+
+char		*change_base(char *s1, t_opt *o)
 {
 	char	*s2;
 
@@ -29,14 +34,14 @@ char	*change_base(char *s1, t_opt *o)
 	}
 	if (o->conv == 'X')
 	{
-		s2 = ft_strmap(s1, &ft_toupper);
+		s2 = ft_strmap(s1, &toupper);
 		free(s1);
 		s1 = s2;
 	}
 	return (s1);
 }
 
-char	*unsigned_conversions(unsigned long long int data, t_opt *o)
+char		*unsigned_conversions(unsigned long long int data, t_opt *o)
 {
 	char	*s1;
 	char	*s2;
