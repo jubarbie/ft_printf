@@ -6,18 +6,18 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:10:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 14:38:46 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:20:34 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	toupper(char c)
+static char	char_toupper(char c)
 {
 	return ((char)ft_toupper((int)c));
 }
 
-char		*change_base(char *s1, t_opt *o)
+static char	*change_base(char *s1, t_opt *o)
 {
 	char	*s2;
 
@@ -34,7 +34,7 @@ char		*change_base(char *s1, t_opt *o)
 	}
 	if (o->conv == 'X')
 	{
-		s2 = ft_strmap(s1, &toupper);
+		s2 = ft_strmap(s1, &char_toupper);
 		free(s1);
 		s1 = s2;
 	}
@@ -48,8 +48,10 @@ char		*unsigned_conversions(unsigned long long int data, t_opt *o)
 
 	if ((s1 = ft_uitoa_opt(data, o->prec)) == NULL)
 		return (NULL);
-	if (o->conv == 'o' || o->conv == 'x' || o->conv == 'X')
-		s1 = change_base(s1, o);
-	s2 = padding(s1, ' ', o->width, (o->flags & F_MIN));
-	return (s2);
+	if (o->conv == 'o')	
+		s2 = change_base(s1, o);
+	if (o->conv == 'x' || o->conv == 'X')
+		s2 = tohex(data);
+	s1 = padding(s2, cpad(*o), o->width, (o->flags & F_MIN));
+	return (s1);
 }

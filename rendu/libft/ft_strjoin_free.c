@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 21:15:35 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/12/17 21:39:35 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/16 15:27:12 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	tmp = (char *)s1;
 	s1 = ft_strjoin(tmp, s2);
 	free(tmp);
+	free(s2);
 	return ((char *)s1);
 }

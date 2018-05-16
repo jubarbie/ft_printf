@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 20:38:28 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 12:04:25 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/16 17:46:09 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static size_t	ft_nbrlen(t_ull n)
 	return (1 + ft_nbrlen(n / 10));
 }
 
-static t_ull	ft_llpower(unsigned long long n, int power)
+static t_ull	ft_llpower(t_ull n, int power)
 {
-	unsigned long long int res;
+	t_ull res;
 
 	res = n * n;
 	if (power < 0)

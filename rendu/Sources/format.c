@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signed_conversions.c                               :+:      :+:    :+:   */
+/*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/12 11:10:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 11:42:32 by jubarbie         ###   ########.fr       */
+/*   Created: 2018/05/15 09:54:07 by jubarbie          #+#    #+#             */
+/*   Updated: 2018/05/16 15:25:48 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*signed_conversions(long long int data, t_opt *o)
+char	*prepend(char *s1, char *s2)
 {
-	char	*s1;
-	char	*s2;
+	char *s3;
 
-	if ((s1 = ft_itoa_opt(data, o->prec)) == NULL)
-		return (NULL);
-	if (o->conv == 'i' || o->conv == 'd')
+	if (s1 != NULL && s2 != NULL)
 	{
-		if (*s1 != '-' && o->flags & F_PLU)
-		{
-			s2 = prepend("+", s1);
-			s1 = s2;
-		}
-		else if (*s1 != '-' && o->flags & F_SPA)
-		{
-			s2 = prepend(" ", s1);
-			s1 = s2;
-		}
-		s2 = padding(s1, ' ', o->width, (o->flags & F_MIN));
-		return (s2);
+		s3 = ft_strjoin(s1, s2);
+		free(s2);
+		return (s3);
 	}
 	return (NULL);
+}
+
+char	*padding(char *str, char c, int size, char right)
+{
+	char	*new;
+	char	*fill;
+	int		len;
+
+	if (str == NULL)
+		return (NULL);
+	len = size - ft_strlen(str);
+	if (len <= 0)
+		return (str);
+	fill = ft_strrepeat(c, len);
+	new = (right == 0) ? ft_strjoinfree(fill, str) : ft_strjoinfree(str, fill);
+	return (new);
 }

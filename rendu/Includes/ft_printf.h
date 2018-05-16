@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 18:18:31 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 14:05:15 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:18:52 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <wchar.h>
+# include <limits.h>
 # include "libft.h"
 
 # define FLAGS "#0-+ "
@@ -59,5 +61,8 @@ void			print_array(char **arr);
 int				len_array(char **arr, int size);
 char			*join_array(char **arr, int size);
 void			convert(char **ret, va_list ap, t_opt *o);
+char			*wchar(wchar_t c);
+char			cpad(t_opt o);
+char			*tohex(unsigned long long int nb);
 
 #endif

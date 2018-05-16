@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:08:55 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/15 14:07:15 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/16 15:29:17 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		get_flags(char *str, char *f)
 		j = 0;
 		while (FLAGS[j])
 		{
-			if (*str == FLAGS[j])
+			if (str[i] == FLAGS[j])
 				*f |= (1 << j);
 			j++;
 		}
@@ -49,7 +49,7 @@ int		get_prec(char *str, int *w)
 	int	i;
 
 	i = 0;
-	*w = 0;
+	*w = 1;
 	if (str[i] != '.')
 		return (0);
 	i++;
@@ -88,16 +88,16 @@ char	*get_options(char *str, char **ret, va_list ap)
 	i = 0;
 	if (!str[i] || str[i] != '%')
 		return (str);
-	i = 1;
-	if (str[i] == '%')
-	{
-		*ret = ft_strdup("%");
-		return (str + 2);
-	}
+	i++;
 	i += get_flags(&str[i], &(opt.flags));
 	i += get_width(&str[i], &(opt.width));
 	i += get_prec(&str[i], &(opt.prec));
 	i += get_modif(&str[i], &(opt.modif));
+	if (str[i] == '%')
+	{
+		*ret = padding(ft_strdup("%"), ' ', opt.width, opt.flags & F_MIN);
+		return (str + i + 1);
+	}
 	opt.conv = str[i];
 	convert(ret, ap, &opt);
 	i++;
