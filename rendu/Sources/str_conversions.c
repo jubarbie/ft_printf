@@ -23,10 +23,11 @@ char	*char_conversion(int c, t_opt *o)
 	{
 		str = ft_strnew(1);
 		if (str == NULL)
-			return (NULL);
+		    return (NULL);
 		str[0] = (char)c;
 	}
 	s1 = padding(str, ' ', o->width, (o->flags & F_MIN));
+    free(str);
 	return (s1);
 }
 
@@ -35,9 +36,12 @@ char	*str_conversion(char *str, t_opt *o)
 	char	*s1;
 	char	*s2;
 
+    if (str == NULL)
+        return (ft_strdup("(null)"));
 	s1 = ft_strdup(str);
 	if (s1 == NULL)
 		return (NULL);
 	s2 = padding(s1, cpad(*o), o->width, (o->flags & F_MIN));
+    free(s1);
 	return (s2);
 }

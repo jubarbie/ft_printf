@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#define B_H "0123456789abcdef"
 
 static int	bitlen(unsigned long long int nb)
 {
@@ -20,10 +21,10 @@ static int	bitlen(unsigned long long int nb)
 
 	len = 0;
 	i = 0;
-	while (i < (int)(sizeof(unsigned long long int)))
+	while (i < (int)(sizeof(unsigned long long int) * 8))
 	{
 		j = 0;
-		if (nb & (1 << i))
+		if (nb & ((unsigned long long int)1 << i))
 			len = i + 1;
 		i++;
 	}
@@ -39,6 +40,8 @@ char		*tohex(unsigned long long int nb)
 	int		b;
 
 	len = bitlen(nb);
+    if (nb == 0)
+        return (ft_strdup("0"));
 	len = len / 4 + ((len % 4 > 0) ? 1 : 0);
 	str = ft_strnew(len);
 	if (str == NULL)
@@ -49,9 +52,9 @@ char		*tohex(unsigned long long int nb)
 		j = -1;
 		b = 0;
 		while (++j < 4)
-			if (nb & (1 << ((4 * i) + j)))
+			if (nb & ((unsigned long long)1 << ((4 * i) + j)))
 				b |= (1 << j);
-		str[i] = b + 48;
+		str[len - i - 1] = B_H[b];
 	}
 	return (str);
 }

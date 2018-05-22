@@ -21,7 +21,7 @@ void	convert(char **ret, va_list ap, t_opt *o)
 		else if (o->modif & M_L || o->modif & M_J)
 			*ret = unsigned_conversions(va_arg(ap, long unsigned int), o);
 		else
-			*ret = unsigned_conversions(va_arg(ap, int), o);
+		    *ret = unsigned_conversions(va_arg(ap, unsigned int), o);
 	}
 	if (ft_strchr(CONV_SIGN, o->conv) != NULL)
 	{

@@ -31,8 +31,9 @@
 (signed char)78, (intmax_t)23, (size_t)23
 #define TEST8 "%lx\n", (long)4294967254
 #define TEST9 \
-	"%s, %C, %d, %i, %o, %u, %x, %X\n", \
-	"I love you too", \
+	"%s, %c, %C, %d, %i, %o, %u, %x, %X\n", \
+	NULL, \
+    0, \
 	945, \
 	-1203, \
 	32001, \

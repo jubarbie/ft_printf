@@ -49,7 +49,7 @@ int		get_prec(char *str, int *w)
 	int	i;
 
 	i = 0;
-	*w = 1;
+	*w = -1;
 	if (str[i] != '.')
 		return (0);
 	i++;

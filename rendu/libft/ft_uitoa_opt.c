@@ -37,7 +37,7 @@ static t_ull	ft_llpower(t_ull n, int power)
 	return (res);
 }
 
-static char		*do_itoa(char *str, t_ull n, int len, int prec)
+static char		*do_itoa(char *str, t_ull n, int len)
 {
 	char	*ps;
 	t_ull	dig;
@@ -45,8 +45,6 @@ static char		*do_itoa(char *str, t_ull n, int len, int prec)
 	ps = str;
 	if (n == 0)
 		*str = '0';
-	while (prec-- - len > 0)
-		*ps++ = '0';
 	while (len-- > 0)
 	{
 		dig = n / ft_llpower(10, len);
@@ -56,15 +54,14 @@ static char		*do_itoa(char *str, t_ull n, int len, int prec)
 	return (str);
 }
 
-char			*ft_uitoa_opt(t_ull n, int prec)
+char			*ft_uitoa_opt(t_ull n)
 {
 	int		len;
 	char	*str;
 
 	str = NULL;
 	len = ft_nbrlen(n);
-	str = ft_strnew((prec > len) ? prec : len);
 	if (str == NULL)
 		return (NULL);
-	return (do_itoa(str, n, len, prec));
+	return (do_itoa(str, n, len));
 }
