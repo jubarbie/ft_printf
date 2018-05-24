@@ -12,6 +12,24 @@
 
 #include "ft_printf.h"
 
+static char *precision(char *str, t_opt *o)
+{
+    char    *ret;
+
+    if (o->prec < 0)
+        return (ft_strdup(str));
+    else if (o->prec == 0)
+        return (ft_strdup(""));
+    else
+    {
+        ret = ft_strnew(o->prec);
+        if (ret == NULL)
+            return (NULL);
+        ft_strncpy(ret, str, o->prec);
+    }
+    return (ret);
+}
+
 char	*char_conversion(int c, t_opt *o)
 {
 	char	*str;
@@ -41,7 +59,9 @@ char	*str_conversion(char *str, t_opt *o)
 	s1 = ft_strdup(str);
 	if (s1 == NULL)
 		return (NULL);
-	s2 = padding(s1, cpad(*o), o->width, (o->flags & F_MIN));
+    s2 = precision(s1, o);
     free(s1);
-	return (s2);
+	s1 = padding(s2, cpad(*o), o->width, (o->flags & F_MIN));
+    free(s2);
+	return (s1);
 }

@@ -61,6 +61,7 @@ char			*ft_uitoa_opt(t_ull n)
 
 	str = NULL;
 	len = ft_nbrlen(n);
+    str = ft_strnew(len);
 	if (str == NULL)
 		return (NULL);
 	return (do_itoa(str, n, len));

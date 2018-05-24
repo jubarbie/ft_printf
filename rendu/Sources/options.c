@@ -14,5 +14,8 @@
 
 char	cpad(t_opt o)
 {
-	return ((o.flags & F_ZER && !(o.flags & F_MIN)) ? '0' : ' ');
+    char c;
+    
+    c = ((o.flags & F_ZER) && (o.flags & F_MIN) == 0) ? '0' : ' ';
+	return (c);
 }

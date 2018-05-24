@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS= -I../rendu/libft -I../rendu/Includes -Wall -Wextra -Werror
+CFLAGS= -I../rendu/libft -I../rendu/Includes
 SRC=	main.c
 	
 OBJS = $(SRC:.c=.o)
-NAME = pritnf_test
+NAME = printf_test
 
 all: $(NAME)
 

@@ -67,7 +67,7 @@ char					*ft_itoa_opt(long long int n)
 		return (ft_strdup("-9223372036854775807"));
 	str = NULL;
 	len = ft_nbrlen(n);
-	len += (n < 0) ? 1 : 0;
+	len += (n <= 0) ? 1 : 0;
 	str = ft_strnew(len);
 	if (str == NULL)
 		return (NULL);
