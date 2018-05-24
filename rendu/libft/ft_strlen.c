@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 11:32:22 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/02/19 11:35:00 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:14:38 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t len;
 
 	len = 0;
-	while (*s)
+	while (*s != '\0')
 	{
 		len++;
 		s++;

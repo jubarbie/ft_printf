@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 12:02:37 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/02/19 12:10:09 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:41:23 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	*ft_strcat(char *restrict s1, const char *restrict s2)
 	char	*ps1;
 
 	ps1 = s1;
-	while (*ps1)
+	while (*ps1 != '\0')
 		ps1++;
-	while (*s2)
+	while (*s2 != '\0')
 	{
 		*ps1 = *s2;
 		ps1++;

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:10:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/16 14:46:31 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:28:06 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*signed_conversions(long long int data, t_opt *o)
 
 	if ((s1 = ft_itoa_opt(data)) == NULL)
 		return (NULL);
+    if ((o->flags & F_ZER) && ((o->flags & F_PLU) || (data < 0)) && !(o->flags & F_MIN))
+        o->prec = o->width - 1;
     s2 = precision(s1, o);
     free(s1);
     s1 = s2;

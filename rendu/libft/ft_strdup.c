@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 11:35:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/02/19 11:45:39 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:42:35 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 
 	len = ft_strlen(s1);
-	s2 = malloc(sizeof(char) * len + 1);
+	s2 = ft_strnew(len);
 	if (s2 == NULL)
 		return (NULL);
 	ps2 = s2;

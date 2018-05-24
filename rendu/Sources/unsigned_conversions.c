@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 11:10:40 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/16 18:20:34 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:30:19 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static char *add_alt(char *s1, t_opt *o)
 {
     char    *str;
 
-    if (o->flags & F_ALT && o->prec != 0)
+    if (o->flags & F_ALT)
     {
-        if ((o->conv == 'o' || o->conv == 'O') && *s1 != '0' && o->prec != 0)
+        if ((o->conv == 'o' || o->conv == 'O') && *s1 != '0')
             str = prepend("0", s1);
-	    else if ((o->conv == 'x' || o->conv == 'X') && !ft_strequ("0", s1))
+	    else if ((o->conv == 'x' || o->conv == 'X') && !ft_strequ("0", s1) && o->prec != 0)
             str = prepend("0x", s1);
         else
             str = ft_strdup(s1);
@@ -44,7 +44,7 @@ static char *precision(char *str, t_opt *o)
     len = ft_strlen(str);
     if (o->prec == 0)
         s1 = ft_strdup("");
-    else if (o->prec < 0 || len >= o->prec)
+	else if (o->prec < 0 || len >= o->prec)
         s1 = ft_strdup(str);
     else
         s1 = padding(str, '0', o->prec, 0);
@@ -97,7 +97,6 @@ char		*unsigned_conversions(unsigned long long int data, t_opt *o)
     else
 	    s1 = ft_uitoa_opt(data);
     if ((o->conv == 'x' || o->conv == 'X') && (o->flags & F_ALT) && (o->flags & F_ZER) && !(o->flags & F_MIN))
-
         o->prec = o->width - 2;
     s2 = format_result(s1, o);
     free(s1);

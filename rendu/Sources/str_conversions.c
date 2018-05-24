@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 14:05:08 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/16 15:27:12 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:13:24 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*char_conversion(int c, t_opt *o)
 		str = ft_strnew(1);
 		if (str == NULL)
 		    return (NULL);
-		str[0] = (char)c;
+		str[0] = c;
 	}
 	s1 = padding(str, ' ', o->width, (o->flags & F_MIN));
     free(str);

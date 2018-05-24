@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/19 11:46:18 by jubarbie          #+#    #+#             */
-/*   Updated: 2016/02/20 16:28:14 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:41:47 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	char	*pdst;
 
 	pdst = dst;
-	while (*src)
+	while (*src != '\0')
 	{
 		*pdst = *src;
 		src++;

@@ -6,7 +6,7 @@
 /*   By: jubarbie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 11:43:02 by jubarbie          #+#    #+#             */
-/*   Updated: 2018/05/16 17:44:33 by jubarbie         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:22:10 by jubarbie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		main(void)
 	int		i;
 	char*	l;
     char    *s;
-	
+	/*
 	l = setlocale(LC_ALL, "");
 	if (l == NULL) {
 		printf("Locale not set\n");
@@ -102,6 +102,9 @@ int		main(void)
     s = ft_strnew(2);
     s[0] = 0;
     s[1] = '\n';
-    printf("w: %zu, p: %d\n", write(1, s, 2), printf("%s\n", s));
+    write(1, s, 2);*/
+	i = -1;
+	while (++i < 127)
+		write(1, &i, 1);
 	return (0);
 }
