@@ -41,29 +41,19 @@ char	*get_segment(char *str, char **ret, va_list ap)
 	return (str + i);
 }
 
-int		parse_format(char ***arr, const char *restrict format, va_list ap)
+int		parse_format(t_list **lstStr, const char *restrict format, va_list ap)
 {
 	int		nb_args;
 	char	*str;
 	int		i;
 
 	nb_args = get_nb_args(format);
-	*arr = (char **)malloc(sizeof(char *) * (nb_args + 1) * 2);
-	if (*arr != NULL)
+	while (*str)
 	{
-		i = 0;
-		while (i < (nb_args + 1) * 2)
-			(*arr)[i++] = NULL;
-		str = (char *)format;
-		i = 0;
-		while (*str)
-		{
-			str = get_segment(str, &((*arr)[i]), ap);
-			i++;
-		}
-		return (nb_args);
+		str = get_segment(str, lstStr, ap);
+		i++;
 	}
-	return (-1);
+	return (nb_args);
 }
 
 int		ft_printf(const char *restrict format, ...)
@@ -71,10 +61,10 @@ int		ft_printf(const char *restrict format, ...)
 	int		nb;
 	va_list	ap;
 	char	*str;
-	char	**arr;
+	t_list	*lstStr;
 
 	va_start(ap, format);
-	nb = parse_format(&arr, format, ap);
+	nb = parse_format(&lstStr, format, ap);
 	if (arr == NULL)
 		return (-1);
 	str = join_array(arr, (nb + 1) * 2);
